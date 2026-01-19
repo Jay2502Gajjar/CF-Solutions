@@ -1,46 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(){
+int main() {
     int t;
-    cin >> t;
+    cin>>t;
+
     while(t--){
         int n;
-        cin >> n;
+        cin>>n;
 
-        vector<long long>a(n);
-        for(int i = 0; i < n; i++){
-            cin >> a[i];
+        vector<int> a(n);
+
+        for(int i = 0;i<n;i++){
+            cin>>a[i];
         }
 
-        long long mn = *min_element(a.begin(), a.end());
+        sort(a.begin(),a.end());
 
-        vector<long long>b, c;
-
-        for(int i = 0; i < n; i++){
-            if(a[i] == mn) b.push_back(a[i]);
-            else c.push_back(a[i]);
-        }
-
-        if(c.empty()){
-            cout << -1 << endl;
+        if(a[0] == a[n-1]){
+            cout<<-1<<endl;
             continue;
         }
 
-        long long g = c[0];
-        for(int i = 1; i < c.size(); i++){
-            g = gcd(g, c[i]);
+        int c = 0;
+        while(c<n && a[c] == a[0]){
+            c++;
         }
 
-        if(g != mn){
-            cout << -1 << endl;
-            continue;
+        cout<<c<<" "<<n-c<<endl;
+
+        for(int i = 0;i<c;i++){
+            cout<<a[i]<<" ";
         }
 
-        cout << b.size() << " " << c.size() << endl;
-        for(auto x : b) cout << x << " ";
-        cout << endl;
-        for(auto x : c) cout << x << " ";
-        cout << endl;
+        for(int i = c;i<n;i++){
+            cout<<a[i]<<" ";
+        }
+
+        cout<<endl;
     }
+
+    return 0;
 }
